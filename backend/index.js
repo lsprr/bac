@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const cors = require('cors');
 
+require('dotenv').config()
+
 const app = express();
 const PORT = 3001;
 const SECRET = process.env.JWT_SECRET;
