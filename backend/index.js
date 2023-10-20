@@ -15,6 +15,13 @@ app.use(cors());
 
 app.post('/generate_token', (req, res) => {
     const { login, password } = req.body;
+
+    if (!login || !password) {
+        return res.status(400).json({
+            error: 'Login and password are required'
+        });
+    }
+
     const token = jwt.sign({ login, password }, SECRET);
     res.json({ token });
 });
