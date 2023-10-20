@@ -63,6 +63,7 @@ const LoginForm: React.FunctionComponent<LoginFormProps> = ({ onHandleSubmit, se
                     name="username"
                     onChange={e => setLogin(e.target.value)}
                     className="mt-2 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    required
                 />
             </div>
 
@@ -80,6 +81,7 @@ const LoginForm: React.FunctionComponent<LoginFormProps> = ({ onHandleSubmit, se
                     name="password"
                     onChange={e => setPassword(e.target.value)}
                     className="mt-2 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    required
                 />
             </div>
 

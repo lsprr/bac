@@ -1,9 +1,46 @@
 import axios from 'axios';
 import React, { useState } from "react";
 
-export default function TrackingView() {
-    const [trackingNumber, setTrackingNumber] = useState('');
-    const [trackingInfo, setTrackingInfo] = useState(null);
+interface TrackingStatusItemProps {
+    item: {
+        uid: string;
+        timestamp: string;
+        tracking_code_vendor?: {
+            tracking_code?: {
+                tracking_code_locales: Array<{
+                    description: string;
+                }>
+            }
+        };
+        tracking_code?: {
+            tracking_code_locales: Array<{
+                description: string;
+            }>
+        };
+        location?: string;
+        city?: string;
+        state?: string;
+    };
+}
+
+interface TrackingStatusListProps {
+    items: Array<TrackingStatusItemProps['item']>;
+    labels: {
+        tracking_number?: string;
+        external_tracking_number?: string;
+    };
+}
+
+interface SearchFormProps {
+    trackingNumber: string;
+    setTrackingNumber: React.Dispatch<React.SetStateAction<string>>;
+    handleTracking: () => Promise<void>;
+    onHandleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const TrackingView = () => {
+    const [trackingNumber, setTrackingNumber] = useState<string>('');
+    const [trackingInfo, setTrackingInfo] = useState<any | null>(null);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -27,7 +64,7 @@ export default function TrackingView() {
     )
 }
 
-function Header() {
+const Header = () => {
     return (
         <header>
             <h2 className="text-2xl font-bold mt-5">
@@ -38,7 +75,7 @@ function Header() {
     );
 }
 
-function SearchForm({ trackingNumber, setTrackingNumber, handleTracking, onHandleSubmit }) {
+const SearchForm = ({ trackingNumber, setTrackingNumber, handleTracking, onHandleSubmit }: SearchFormProps) => {
     return (
         <form onSubmit={onHandleSubmit}>
             <div className='mb-5'>
@@ -61,7 +98,7 @@ function SearchForm({ trackingNumber, setTrackingNumber, handleTracking, onHandl
     );
 }
 
-function TrackingStatusList({ items, labels }) {
+const TrackingStatusList = ({ items, labels }: TrackingStatusListProps) => {
     const trackingNumber = labels?.tracking_number;
     const externalTrackingNumber = labels?.external_tracking_number;
 
@@ -84,7 +121,7 @@ function TrackingStatusList({ items, labels }) {
     );
 }
 
-function TrackingStatusItem({ item }) {
+const TrackingStatusItem = ({ item }: TrackingStatusItemProps) => {
     const date = new Date(item.timestamp);
     const day = date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
     const time = date.toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric' });
@@ -124,3 +161,5 @@ function TrackingStatusItem({ item }) {
         </li>
     );
 }
+
+export default TrackingView;
