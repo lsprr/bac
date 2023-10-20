@@ -47,6 +47,11 @@ const TrackingView = () => {
     };
 
     const handleTracking = async () => {
+
+        if (!trackingNumber) {
+            return;
+        }
+
         try {
             const response = await axios.get(`http://localhost:3001/tracking_parcel?tracking_number=${trackingNumber}`);
             setTrackingInfo(response.data);

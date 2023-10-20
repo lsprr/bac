@@ -19,6 +19,10 @@ const LoginView = () => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if (!login || !password) {
+            return;
+        }
+
         try {
             const response = await axios.post<{ token: string }>('http://localhost:3001/generate_token', { login, password });
             setToken(response.data.token);
