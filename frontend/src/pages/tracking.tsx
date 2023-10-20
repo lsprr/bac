@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function TrackingView() {
     const [trackingNumber, setTrackingNumber] = useState('');
     const [trackingInfo, setTrackingInfo] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-    }
+    };
 
     const handleTracking = async () => {
         try {
@@ -18,69 +18,104 @@ export default function TrackingView() {
         }
     };
 
-    const status = trackingInfo?.parcel_tracking_items.map((item) => {
-        const date = new Date(item.timestamp);
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        return (
-            <>
-                <li className="mb-10 ml-6">
-                    <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-                        <svg className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                        </svg>
-                    </span>
-                    <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">Flowbite Application UI v2.0.0 <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ml-3">Latest</span></h3>
-                    <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Released on January 13th, 2022</time>
-                    <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce & Marketing pages.</p>
-                    <a href="#" className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"><svg className="w-3.5 h-3.5 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z" />
-                        <path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-                    </svg> Download ZIP</a>
-                </li>
-                <li className="mb-10 ml-6">
-                    <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-                        <svg className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                        </svg>
-                    </span>
-                    <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Flowbite Figma v1.3.0</h3>
-                    <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Released on December 7th, 2021</time>
-                    <p className="text-base font-normal text-gray-500 dark:text-gray-400">All of the pages and components are first designed in Figma and we keep a parity between the two versions even as we update the project.</p>
-                </li>
-                <li className="ml-6">
-                    <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-                        <svg className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                        </svg>
-                    </span>
-                    <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Flowbite Library v1.2.2</h3>
-                    <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Released on December 2nd, 2021</time>
-                    <p className="text-base font-normal text-gray-500 dark:text-gray-400">Get started with dozens of web components and interactive elements built on top of Tailwind CSS.</p>
-                </li>
-            </>
-        )
-    });
+    return (
+        <section className='max-w-4xl mx-5 my-20 lg:mx-auto'>
+            <Header />
+            <SearchForm trackingNumber={trackingNumber} setTrackingNumber={setTrackingNumber} handleTracking={handleTracking} onHandleSubmit={handleSubmit} />
+            {trackingInfo && <TrackingStatusList items={trackingInfo['parcel_tracking_items']} />}
+        </section >
+    )
+}
 
+function Header() {
     return (
         <section>
-            <header>
-                <h1>BPS Tracking</h1>
-                <h2>Enter your tracking number</h2>
-            </header>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-6">
-                    <label htmlFor="tracking" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                    <input value={trackingNumber} onChange={e => setTrackingNumber(e.target.value)} type="text" id="tracking" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tracking #" required />
+            <div className="mx-auto pt-32">
+                <div className="mx-auto">
+                    <h1 className="text-3xl font-extrabold sm:text-5xl">
+                        BPS Tracking
+                    </h1>
                 </div>
-                <button onClick={handleTracking} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
-            </form>
-            {trackingNumber &&
-                <>
-                    <ol className="relative border-l border-gray-200 dark:border-gray-700">
-                        {status}
-                    </ol>
-                </>
-            }
+            </div>
         </section>
-    )
+
+    );
+}
+
+function SearchForm({ trackingNumber, setTrackingNumber, handleTracking, onHandleSubmit }) {
+    return (
+        <form onSubmit={onHandleSubmit}>
+            <div className='mb-5'>
+                <label htmlFor="tracking" className="sm:block mt-5">Enter your tracking number</label>
+                <input
+                    value={trackingNumber}
+                    onChange={e => setTrackingNumber(e.target.value)}
+                    type="text"
+                    id="tracking"
+                    className="mt-2 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    placeholder="Tracking #"
+                    required
+                />
+            </div>
+            <button onClick={handleTracking} className="w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium mb-1 md:mr-2 text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto">Search</button>
+            <button className="w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium mt-1 md:ml-2 text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none" disabled>Show Map</button>
+        </form>
+    );
+}
+
+function TrackingStatusList({ items }) {
+    return (
+        <ol className="mt-3 divide-y divider-gray-200 pt-10">
+            {items.map(item => (
+                <TrackingStatusItem key={item.uid} item={item} />
+            ))}
+        </ol>
+    );
+}
+
+function TrackingStatusItem({ item }) {
+    const date = new Date(item.timestamp);
+    const day = date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    const time = date.toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric' });
+    const description = item.tracking_code_vendor?.tracking_code?.tracking_code_locales[0]?.description ?? item.tracking_code?.tracking_code_locales[0]?.description;
+    const location = item.location ?? item.city + ', ' + item.state;
+
+    return (
+        <>
+            <li>
+                <div className="items-center block py-3 sm:flex">
+                    <div className="text-gray-800">
+
+                        <time className="text-lg font-semibold">{day}</time>
+                        <div className="text-base font-normal flex items-center">
+                            <span className="text-gray-800 capitalize">
+                                {description}
+                            </span>
+                            <span className="inline-flex items-center justify-center w-4 h-4 ml-2 text-sm font-semibold rounded-full bg-green-700 text-green-300">
+                                <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                                </svg>
+                                <span className="sr-only">Icon description</span>
+                            </span>
+                        </div>
+
+                        <span className="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 border border-gray-500">
+                            <svg className="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
+                            </svg>
+                            {time}
+                        </span>
+
+                        <span className="uppercase bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded border border-blue-600">
+                            <svg className="w-2.5 h-2.5 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19ZM8.374 17.4a7.6 7.6 0 0 1-5.9-7.4c0-.83.137-1.655.406-2.441l.239.019a3.887 3.887 0 0 1 2.082 2.5 4.1 4.1 0 0 0 2.441 2.8c1.148.522 1.389 2.007.732 4.522Zm3.6-8.829a.997.997 0 0 0-.027-.225 5.456 5.456 0 0 0-2.811-3.662c-.832-.527-1.347-.854-1.486-1.89a7.584 7.584 0 0 1 8.364 2.47c-1.387.208-2.14 2.237-2.14 3.307a1.187 1.187 0 0 1-1.9 0Zm1.626 8.053-.671-2.013a1.9 1.9 0 0 1 1.771-1.757l2.032.619a7.553 7.553 0 0 1-3.132 3.151Z" />
+                            </svg>
+                            {location}
+                        </span>
+
+                    </div>
+                </div>
+            </li>
+        </>
+    );
 }
