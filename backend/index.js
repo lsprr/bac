@@ -40,6 +40,11 @@ app.get('/tracking_parcel', async (req, res) => {
     }
 });
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
