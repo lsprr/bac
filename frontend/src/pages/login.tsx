@@ -1,16 +1,26 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import axios from 'axios';
 
-export default function LoginView() {
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
-    const [token, setToken] = useState('');
+interface JWTTokenDisplayProps {
+    token: string;
+}
 
-    const handleSubmit = async (e) => {
+interface LoginFormProps {
+    onHandleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    setLogin: React.Dispatch<React.SetStateAction<string>>;
+    setPassword: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const LoginView = () => {
+    const [login, setLogin] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [token, setToken] = useState<string>('');
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:3001/generate_token', { login, password });
+            const response = await axios.post<{ token: string }>('http://localhost:3001/generate_token', { login, password });
             setToken(response.data.token);
         } catch (error) {
             console.error('Error generating token:', error);
@@ -26,7 +36,7 @@ export default function LoginView() {
     );
 }
 
-function Header() {
+const Header = () => {
     return (
         <header>
             <h2 className="text-2xl font-bold mt-5">
@@ -36,7 +46,7 @@ function Header() {
     );
 }
 
-function LoginForm({ onHandleSubmit, setLogin, setPassword }) {
+const LoginForm: React.FunctionComponent<LoginFormProps> = ({ onHandleSubmit, setLogin, setPassword }) => {
     return (
         <form action="#" className="mt-8 grid grid-cols-6 gap-6" onSubmit={onHandleSubmit}>
             <div className="col-span-6 sm:col-span-3">
@@ -85,10 +95,10 @@ function LoginForm({ onHandleSubmit, setLogin, setPassword }) {
                 </p>
             </div>
         </form>
-    );
+    )
 }
 
-function JWTTokenDisplay({ token }) {
+const JWTTokenDisplay = ({ token }: JWTTokenDisplayProps) => {
     return (
         <div className="mt-8 grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
@@ -99,3 +109,5 @@ function JWTTokenDisplay({ token }) {
         </div>
     )
 }
+
+export default LoginView;
