@@ -52,7 +52,7 @@ function LoginForm({ onHandleSubmit, setLogin, setPassword }) {
                     id="Username"
                     name="username"
                     onChange={e => setLogin(e.target.value)}
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-2 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 />
             </div>
 
@@ -69,7 +69,7 @@ function LoginForm({ onHandleSubmit, setLogin, setPassword }) {
                     id="password"
                     name="password"
                     onChange={e => setPassword(e.target.value)}
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    className="mt-2 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 />
             </div>
 
@@ -93,7 +93,7 @@ function JWTTokenDisplay({ token }) {
         <div className="mt-8 grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0 break-all">
-                    {token}
+                    <b className='text-gray-800'>Your JWT Token: </b>{token}
                 </p>
             </div>
         </div>

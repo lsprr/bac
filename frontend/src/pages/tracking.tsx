@@ -19,7 +19,7 @@ export default function TrackingView() {
     };
 
     return (
-        <section className='max-w-4xl mx-5 my-20 lg:mx-auto'>
+        <section className='mt-10'>
             <Header />
             <SearchForm trackingNumber={trackingNumber} setTrackingNumber={setTrackingNumber} handleTracking={handleTracking} onHandleSubmit={handleSubmit} />
             {trackingInfo && <TrackingStatusList items={trackingInfo['parcel_tracking_items']} />}
@@ -29,15 +29,11 @@ export default function TrackingView() {
 
 function Header() {
     return (
-        <section>
-            <div className="mx-auto pt-32">
-                <div className="mx-auto">
-                    <h1 className="text-3xl font-extrabold sm:text-5xl">
-                        BPS Tracking
-                    </h1>
-                </div>
-            </div>
-        </section>
+        <header>
+            <h2 className="text-2xl font-bold mt-5">
+                BPS Tracking
+            </h2>
+        </header>
 
     );
 }
@@ -57,8 +53,10 @@ function SearchForm({ trackingNumber, setTrackingNumber, handleTracking, onHandl
                     required
                 />
             </div>
-            <button onClick={handleTracking} className="w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium mb-1 md:mr-2 text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto">Search</button>
-            <button className="w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium mt-1 md:ml-2 text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none" disabled>Show Map</button>
+            <div className='flex justify-between md:justify-start'>
+                <button onClick={handleTracking} className="mr-5 inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">Track Parcel</button>
+                <button className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" disabled>Show Map</button>
+            </div>
         </form>
     );
 }
