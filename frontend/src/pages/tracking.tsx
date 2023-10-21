@@ -40,6 +40,7 @@ interface SearchFormProps {
 
 const TrackingView = () => {
     const [trackingNumber, setTrackingNumber] = useState<string>('');
+    const [lastFetchedTrackingNumber, setLastFetchedTrackingNumber] = useState<string>('');
     const [trackingInfo, setTrackingInfo] = useState<any | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -53,10 +54,15 @@ const TrackingView = () => {
             return;
         }
 
+        if (trackingNumber === lastFetchedTrackingNumber) {
+            return;
+        }
+
         try {
             setLoading(true);
             const response = await axios.get(`http://localhost:3001/tracking_parcel?tracking_number=${trackingNumber}`);
             setTrackingInfo(response.data);
+            setLastFetchedTrackingNumber(trackingNumber);
             setLoading(false);
         } catch (error) {
             console.error('Error fetching tracking info:', error);
