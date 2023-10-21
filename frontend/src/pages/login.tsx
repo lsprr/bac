@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import axios from 'axios';
+import Header from '@/components/shared/Header';
 
 interface JWTTokenDisplayProps {
     token: string;
@@ -33,20 +34,10 @@ const LoginView = () => {
 
     return (
         <section>
-            <Header />
+            <Header title={"Login"} />
             <LoginForm onHandleSubmit={handleSubmit} setLogin={setLogin} setPassword={setPassword} />
             {token && <JWTTokenDisplay token={token} />}
         </section>
-    );
-}
-
-const Header = () => {
-    return (
-        <header>
-            <h2 className="text-2xl font-bold mt-5">
-                Login
-            </h2>
-        </header>
     );
 }
 

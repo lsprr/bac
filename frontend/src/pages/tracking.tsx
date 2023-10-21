@@ -1,5 +1,6 @@
-import axios from 'axios';
 import React, { useState } from "react";
+import axios from 'axios';
+import Header from "@/components/shared/Header";
 
 interface TrackingStatusItemProps {
     item: {
@@ -71,22 +72,11 @@ const TrackingView = () => {
 
     return (
         <section className='mt-10'>
-            <Header />
+            <Header title={"BPS Tracking"} />
             <SearchForm trackingNumber={trackingNumber} setTrackingNumber={setTrackingNumber} handleTracking={handleTracking} onHandleSubmit={handleSubmit} loading={loading} />
             {trackingInfo && <TrackingStatusList labels={trackingInfo['label']} items={trackingInfo['parcel_tracking_items']} />}
         </section >
     )
-}
-
-const Header = () => {
-    return (
-        <header>
-            <h2 className="text-2xl font-bold mt-5">
-                BPS Tracking
-            </h2>
-        </header>
-
-    );
 }
 
 const SearchForm = ({ trackingNumber, setTrackingNumber, handleTracking, onHandleSubmit, loading }: SearchFormProps) => {
