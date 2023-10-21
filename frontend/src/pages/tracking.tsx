@@ -30,9 +30,10 @@ const TrackingView = () => {
             const response = await axios.get(`http://localhost:3001/tracking_parcel?tracking_number=${trackingNumber}`);
             setTrackingInfo(response.data);
             setLastFetchedTrackingNumber(trackingNumber);
-            setLoading(false);
         } catch (error) {
             console.error('Error fetching tracking info:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
