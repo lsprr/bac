@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import Header from "@/components/shared/Header";
 import SearchForm from "@/components/SearchForm";
-import TrackingStatusItem from "@/components/TrackingStatusItem";
+import TrackingStatusList from "@/components/TrackingStatusList";
 
 const TrackingView = () => {
     const [trackingNumber, setTrackingNumber] = useState<string>('');
@@ -41,7 +41,7 @@ const TrackingView = () => {
         <section className='mt-10'>
             <Header title={"BPS Tracking"} />
             <SearchForm trackingNumber={trackingNumber} setTrackingNumber={setTrackingNumber} handleTracking={handleTracking} onHandleSubmit={handleSubmit} loading={loading} />
-            {trackingInfo && <TrackingStatusItem labels={trackingInfo['label']} items={trackingInfo['parcel_tracking_items']} />}
+            {trackingInfo && <TrackingStatusList labels={trackingInfo['label']} items={trackingInfo['parcel_tracking_items']} />}
         </section >
     )
 }
