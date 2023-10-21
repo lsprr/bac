@@ -5,6 +5,7 @@ interface SearchFormProps {
     setTrackingNumber: React.Dispatch<React.SetStateAction<string>>;
     handleTracking: () => Promise<void>;
     onHandleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    loading: boolean;
 }
 
 const SearchForm = ({ trackingNumber, setTrackingNumber, handleTracking, onHandleSubmit, loading }: SearchFormProps) => {
