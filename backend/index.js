@@ -13,6 +13,11 @@ const TOKEN = process.env.BEARER_TOKEN;
 app.use(express.json());
 app.use(cors());
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+})
+
 app.post('/generate_token', (req, res) => {
     const { login, password } = req.body;
 
@@ -28,22 +33,25 @@ app.post('/generate_token', (req, res) => {
 
 app.get('/tracking_parcel', async (req, res) => {
     const { tracking_number } = req.query;
+
+    if (!tracking_number) {
+        return res.status(400).json({
+            error: 'Tracking number is required'
+        });
+    }
+
     try {
         const response = await axios.get(`https://bps.bringer.io/public/api/v2/get/parcel/tracking.json?tracking_number=${tracking_number}`, {
             headers: {
-                Authorization: TOKEN
+                Authorization: `Bearer ${TOKEN}`
             }
         });
         res.json(response.data);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to retrieve parcel info' });
+        const errorMessage = error.response?.data?.message || 'Failed to retrieve parcel info';
+        res.status(500).json({ error: errorMessage });
     }
 });
-
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-})
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
