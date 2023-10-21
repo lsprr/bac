@@ -13,11 +13,6 @@ const TOKEN = process.env.BEARER_TOKEN;
 app.use(express.json());
 app.use(cors());
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-})
-
 app.post('/generate_token', (req, res) => {
     const { login, password } = req.body;
 
@@ -40,8 +35,10 @@ app.get('/tracking_parcel', async (req, res) => {
         });
     }
 
+    const encodedTrackingNumber = encodeURIComponent(tracking_number);
+
     try {
-        const response = await axios.get(`https://bps.bringer.io/public/api/v2/get/parcel/tracking.json?tracking_number=${tracking_number}`, {
+        const response = await axios.get(`https://bps.bringer.io/public/api/v2/get/parcel/tracking.json?tracking_number=${encodedTrackingNumber}`, {
             headers: {
                 Authorization: `Bearer ${TOKEN}`
             }
@@ -52,6 +49,11 @@ app.get('/tracking_parcel', async (req, res) => {
         res.status(500).json({ error: errorMessage });
     }
 });
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+})
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
