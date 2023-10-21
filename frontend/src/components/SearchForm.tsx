@@ -4,13 +4,13 @@ interface SearchFormProps {
     trackingNumber: string;
     setTrackingNumber: React.Dispatch<React.SetStateAction<string>>;
     handleTracking: () => Promise<void>;
-    onHandleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
     loading: boolean;
 }
 
-const SearchForm = ({ trackingNumber, setTrackingNumber, handleTracking, onHandleSubmit, loading }: SearchFormProps) => {
+const SearchForm = ({ trackingNumber, setTrackingNumber, handleTracking, onSubmit, loading }: SearchFormProps) => {
     return (
-        <form onSubmit={onHandleSubmit}>
+        <form onSubmit={onSubmit}>
             <div className='mb-5'>
                 <label htmlFor="tracking" className="sm:block mt-5">Enter your tracking number</label>
                 <input

@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import backgroundImage from '../../public/assets/images/bg.jpg';
 
-import TrackingView from './tracking'
-import LoginView from './login'
+import TrackingView from '../components/TrackingView'
+import LoginView from '../components/LoginView'
 
 export default function Home() {
   return (
