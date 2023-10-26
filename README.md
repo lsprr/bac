@@ -2,7 +2,7 @@
 
 This is a project utilizing a Node.js environment with separate frontend and backend directories. The project uses Concurrently to run both the backend and frontend services simultaneously during development.
 
-![screenshot](./screenshot.png)  
+![screenshot](./screenshot.jpg)  
 
 ## Getting Started
 
