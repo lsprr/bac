@@ -1,4 +1,4 @@
-# Untitled
+# BAC
 
 This is a project utilizing a Node.js environment with separate frontend and backend directories. The project uses Concurrently to run both the backend and frontend services simultaneously during development.
 
@@ -20,13 +20,13 @@ Before you begin, ensure you have the following installed:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/lsprr/untitled.git
+   git clone https://github.com/lsprr/bac.git
    ```
 
 2. Navigate into the project directory:
 
    ```bash
-   cd untitled
+   cd bac
    ```
 
 3. Install the necessary dependencies:
